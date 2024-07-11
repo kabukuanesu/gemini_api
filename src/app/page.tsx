@@ -1,5 +1,5 @@
-import GeminiPro from "./gemini-vision/page";
+import GeminiChat from "./gemini-chat/page";
 
 export default function Home() {
-  return <GeminiPro />;
+  return <GeminiChat />;
 }
