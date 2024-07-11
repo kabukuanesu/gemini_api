@@ -1,10 +1,11 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const genAI = new GoogleGenerativeAI("AIzaSyAwdlG3NvgU-Rnl085H10__l2Kwjh1Ra9k");
 
 export default function GeminiStart() {
   const [text, setText] = useState("");

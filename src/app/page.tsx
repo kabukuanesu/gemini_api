@@ -1,5 +1,5 @@
-import GeminiStart from "./gemini-start/page";
+import GeminiPro from "./gemini-vision/page";
 
 export default function Home() {
-  return <GeminiStart />;
+  return <GeminiPro />;
 }
