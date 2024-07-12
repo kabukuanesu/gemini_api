@@ -1,5 +1,5 @@
-import GeminiChat from "./gemini-chat/page";
+import GeminiChatting from "./gemini-chatting/page";
 
 export default function Home() {
-  return <GeminiChat />;
+  return <GeminiChatting />;
 }
