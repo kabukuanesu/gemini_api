@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
 
-const genAI = new GoogleGenerativeAI("AIzaSyAwdlG3NvgU-Rnl085H10__l2Kwjh1Ra9k");
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_API_KEY);
 
 export default function GeminiChat() {
   const [chatHistory, setChatHistory] = useState([]);

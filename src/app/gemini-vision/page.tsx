@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
 
-const genAI = new GoogleGenerativeAI("AIzaSyAwdlG3NvgU-Rnl085H10__l2Kwjh1Ra9k");
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_API_KEY);
 
 function filesToGenerativeParts(files) {
   const filePromises = Array.from(files).map((file) => {
