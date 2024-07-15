@@ -1,5 +1,6 @@
-import GeminiChatting from "./gemini-chatting/page";
+import * as React from "react";
+import HomePage from "./home-page/page";
 
 export default function Home() {
-  return <GeminiChatting />;
+  return <HomePage />;
 }
