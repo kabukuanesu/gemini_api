@@ -63,7 +63,7 @@ export default function NavBar({ pageName }: Props) {
     <>
       <div
         className={
-          "w-auto mb-5 bg-gradient-to-r from-red-600 to-red-500 drop-shadow-lg rounded-lg"
+          "w-auto mb-5 bg-gradient-to-r from-green-600 to-green-500 drop-shadow-lg rounded-lg"
         }
       >
         <div className="grid grid-cols-2 p-3 gap-4 text-white">
@@ -80,7 +80,7 @@ export default function NavBar({ pageName }: Props) {
           <div className="flex justify-end gap-5 font-bold text-xl">
             {/*<div>TBA</div>*/}
             <div>
-              <Link href="/system-admin">
+              <Link href="/settings">
                 <SettingsIcon className={"text-white"} />
               </Link>
             </div>
@@ -122,7 +122,7 @@ export default function NavBar({ pageName }: Props) {
           <div className={"w-1/3"}></div>
           <button
             className={
-              "bg-red-700 hover:bg-red-600 text-white w-1/3 h-10 rounded font-bold"
+              "bg-green-700 hover:bg-green-600 text-white w-1/3 h-10 rounded font-bold"
             }
             onClick={logOut}
             autoFocus

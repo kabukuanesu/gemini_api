@@ -1,6 +1,6 @@
 import * as React from "react";
-import HomePage from "./home-page/page";
+import Login from "./login/page";
 
 export default function Home() {
-  return <HomePage />;
+  return <Login />;
 }

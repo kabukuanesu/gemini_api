@@ -110,7 +110,7 @@ export default function HomePage() {
                 >
                   <div className={""}></div>
                 </div>
-                <div className="absolute top-0 left-0 h-12 w-12 rounded-2xl ml-5 px-3 py-3 bg-gradient-to-r from-red-600 to-red-400 text-white">
+                <div className="absolute top-0 left-0 h-12 w-12 rounded-2xl ml-5 px-3 py-3 bg-gradient-to-r from-green-600 to-green-400 text-white">
                   {item.icon}
                 </div>
                 <div className="grid grid-cols-1 divide-y">
@@ -147,7 +147,7 @@ export default function HomePage() {
             <span>
               <b>So this is me trying to craft a dashboard.</b>{" "}
               <a
-                href="http://172.27.12.56:911/"
+                href="/home-page"
                 className="flex items-center ms-0 text-sm font-medium text-blue-600 md:ms-1 md:inline-flex dark:text-blue-500 hover:underline"
               >
                 Lets see how it will end up{" "}

@@ -57,7 +57,7 @@ export default function NavBarTest({ pageName }: Props) {
           <div className="grid grid-rows-1 gap-1">
             <div className="flex justify-start gap-2 ml-1 text-lg">
               <div className={"text-gray-300"}>
-                <a href={"/home-page"}>Support Portal</a> /
+                <a href={"/home-page"}>Cancer Detector</a> /
               </div>
 
               <div className={"font-bold"}>{pageName}</div>
