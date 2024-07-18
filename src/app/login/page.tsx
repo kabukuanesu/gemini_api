@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -15,6 +13,7 @@ const navigation = [
 
 export default function Login() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div>
       <div className="bg-white">
@@ -24,7 +23,7 @@ export default function Login() {
             className="flex items-center justify-between p-6 lg:px-8"
           >
             <div className="flex lg:flex-1">
-              <a href="#" className="-m-1.5 p-1.5">
+              <a href="/home-page" className="-m-1.5 p-1.5">
                 <span className="sr-only">Skin Cancer Detector</span>
                 <img
                   alt=""

@@ -63,14 +63,14 @@ export default function NavBar({ pageName }: Props) {
     <>
       <div
         className={
-          "w-auto mb-5 bg-gradient-to-r from-green-600 to-green-500 drop-shadow-lg rounded-lg"
+          "w-auto mb-5 bg-gradient-to-r from-gray-800 to-gray-800 drop-shadow-lg rounded-lg"
         }
       >
         <div className="grid grid-cols-2 p-3 gap-4 text-white">
           <div className="grid grid-rows-1 gap-1">
             <div className="flex justify-start gap-2 ml-1 text-lg">
               <div className={"text-gray-300"}>
-                <a href={"/home-page"}>Dashboard</a> /
+                <a href={"/home-page"}>SKIN CANCER DETECTOR DASHBOARD</a> /
               </div>
 
               <div className={"font-bold"}>{pageName}</div>
@@ -113,7 +113,7 @@ export default function NavBar({ pageName }: Props) {
         <DialogActions>
           <button
             className={
-              "bg-green-700 hover:bg-green-600 text-white w-1/3 h-10 rounded font-bold"
+              "bg-indigo-600 hover:bg-gray-800 text-white w-1/3 h-10 rounded font-bold"
             }
             onClick={handleClose}
           >
@@ -122,7 +122,7 @@ export default function NavBar({ pageName }: Props) {
           <div className={"w-1/3"}></div>
           <button
             className={
-              "bg-green-700 hover:bg-green-600 text-white w-1/3 h-10 rounded font-bold"
+              "bg-indigo-600 hover:bg-gray-800 text-white w-1/3 h-10 rounded font-bold"
             }
             onClick={logOut}
             autoFocus
