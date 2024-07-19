@@ -285,44 +285,44 @@ export default function Overview() {
                   <div className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 bg-white">
                       <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
-                        | How to use these features
+                        How to use these features
                       </h2>
                       <br />
                       <p className="mt-4 text-black">
-                        <b>| TO DO IMAGE DIAGNOSIS</b>
+                        <b>TO DO IMAGE DIAGNOSIS</b>
                       </p>
                       <p className="mt-4 text-black">
-                        | Press the <b>Upload Image </b> tab
+                        Press the <b>Upload Image </b> tab
                       </p>
                       <p className="mt-4 text-black">
-                        | Drag or select the image to analyse
+                        Drag or select the image to analyse
                       </p>
                       <p className="mt-4 text-black">
-                        | Write on the text input to get accurate results
+                        Write on the text input to get accurate results
                       </p>
-                      <p className="mt-4 text-black">| Press Enter</p>
+                      <p className="mt-4 text-black">Press Enter</p>
                       <br />
                       <p className="mt-4 text-black">
-                        <b>| TO USE SYMPTOMS CHECKER</b>
+                        <b>TO USE SYMPTOMS CHECKER</b>
                       </p>
                       <p className="mt-4 text-black">
-                        | Press the <b>Symptoms Checker</b> tab
+                        Press the <b>Symptoms Checker</b> tab
                       </p>
                       <p className="mt-4 text-black">
-                        | Write all the symptoms on the text area
+                        Write all the symptoms on the text area
                       </p>
-                      <p className="mt-4 text-black">| Press Enter</p>
+                      <p className="mt-4 text-black">Press Enter</p>
                       <br />
                       <p className="mt-4 text-black">
-                        <b>| TO ACCESS SKIN HEALTH LIBRARY</b>
+                        <b>TO ACCESS SKIN HEALTH LIBRARY</b>
                       </p>
                       <p className="mt-4 text-black">
-                        | Press the <b>Skin Health Library</b> tab
+                        Press the <b>Skin Health Library</b> tab
                       </p>
                       <p className="mt-4 text-black">
-                        | Select the resource of your choice
+                        Select the resource of your choice
                       </p>
-                      <p className="mt-4 text-black">| Press Enter</p>
+                      <p className="mt-4 text-black">Press Enter</p>
                       <br />
                     </div>
                   </div>

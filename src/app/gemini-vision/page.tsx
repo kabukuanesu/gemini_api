@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { CalendarDaysIcon, HandRaisedIcon } from "@heroicons/react/24/outline";
-
 import {
   Disclosure,
   DisclosureButton,
@@ -15,8 +12,14 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { PhotoIcon, LightBulbIcon } from "@heroicons/react/24/solid";
 
 dotenv.config();
 
@@ -50,16 +53,16 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Upload", href: "/gemini-vision", current: true },
   { name: "Home", href: "/home-page", current: false },
   { name: "Overview", href: "/overview", current: false },
+  { name: "Upload", href: "/gemini-vision", current: true },
   { name: "Diagnosis", href: "/gemini-chat", current: false },
   { name: "Chatbot", href: "/gemini-chatting", current: false },
   { name: "SkinCare", href: "/library", current: false },
   { name: "History", href: "/history", current: false },
   { name: "Notifications", href: "/reminder", current: false },
-  { name: "Help", href: "/support", current: false },
   { name: "Community", href: "/community", current: false },
+  { name: "Help", href: "/support", current: false },
 ];
 const userNavigation = [
   { name: "My Profile", href: "/profile" },
@@ -75,6 +78,11 @@ export default function GeminiPro() {
   const [text, setText] = useState("");
   const [files, setFiles] = useState([]);
   const [prompt, setPrompt] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
   const handleFileChange = (event) => {
     const fileList = event.target.files;
@@ -87,6 +95,7 @@ export default function GeminiPro() {
   };
 
   const handleButtonClick = async () => {
+    setOpen(true);
     if (files.length === 0) {
       console.error("No files selected.");
       return;
@@ -95,7 +104,7 @@ export default function GeminiPro() {
     const imageParts = await filesToGenerativeParts(files);
 
     const model = await genAI.getGenerativeModel({
-      model: "gemini-pro-vision",
+      model: "gemini-1.5-flash",
     });
 
     const result = await model.generateContent([prompt, ...imageParts]);
@@ -107,17 +116,14 @@ export default function GeminiPro() {
 
   return (
     <div>
-      {/*
-      Tailwind css */}
-
-      <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+      <div className="min-h-full bg-white">
+        <Disclosure as="nav" className="bg-indigo-600">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
-                    alt="Your Company"
+                    alt="Skin Cancer Detector"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     className="h-8 w-8"
                   />
@@ -263,122 +269,161 @@ export default function GeminiPro() {
           </DisclosurePanel>
         </Disclosure>
 
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Upload An Image
-            </h1>
-          </div>
-        </header>
         <main>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <form onSubmit={handleButtonClick}>
-              <div className="space-y-12">
-                <div className="border-b border-gray-900/10 pb-12">
-                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="col-span-full">
-                      <label
-                        htmlFor="cover-photo"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Please Upload Image(s) For Diagnosis
-                      </label>
-                      <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <div className="text-center">
-                          <PhotoIcon
-                            aria-hidden="true"
-                            className="mx-auto h-12 w-12 text-gray-300"
-                          />
-                          <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                            <label
-                              htmlFor="file-input"
-                              className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                            >
-                              <span>Upload a file</span>
-                              <input
-                                id="file-input"
-                                type="file"
-                                className="sr-only"
-                                multiple
-                                onChange={handleFileChange}
-                              />
-                            </label>
-                            <p className="pl-1">or drag and drop</p>
-                          </div>
-                          <p className="text-xs leading-5 text-gray-600">
-                            PNG, JPG, GIF up to 10MB
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-black">
+            <div className="space-y-12">
+              <div className="border-b border-gray-900/10 pb-12">
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  IMAGE DIAGNOSIS
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Upload clear images of skin lesions for analysis. If there is
+                  any, write the description of the skin lesions in the
+                  description box. Then click <b>submit</b>. Check the results
+                  at the end of the page.
+                </p>
+
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="col-span-full">
+                    <label
+                      htmlFor="cover-photo"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Images of skin lesions
+                    </label>
+                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                      <div className="text-center">
+                        <PhotoIcon
+                          aria-hidden="true"
+                          className="mx-auto h-12 w-12 text-gray-300"
+                        />
+                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                          <label
+                            htmlFor="file-input"
+                            className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                          >
+                            <span>Upload image(s) |</span>
+                            <input
+                              type="file"
+                              id="file-input"
+                              multiple
+                              onChange={handleFileChange}
+                            />
+                          </label>
+                          <p className="pl-1 text-indigo-600 font-semibold">
+                            or drag and drop
                           </p>
                         </div>
+                        <p className="text-xs leading-5 text-gray-600">
+                          PNG, JPG, GIF up to 1024MB
+                        </p>
                       </div>
                     </div>
+                  </div>
 
-                    <div className="col-span-full">
-                      <label
-                        htmlFor="prompt"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Prompt
-                      </label>
-                      <div className="mt-2">
-                        <textarea
-                          id="prompt"
-                          rows={3}
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                          value={prompt}
-                          onChange={handlePromptChange}
-                        />
-                      </div>
-                      <p className="mt-3 text-sm leading-6 text-gray-600">
-                        Type in a specific question to ask for better results.
-                      </p>
+                  <div className="col-span-full">
+                    <label
+                      htmlFor="about"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      About
+                    </label>
+                    <div className="mt-2">
+                      <textarea
+                        rows={3}
+                        id="prompt"
+                        value={prompt}
+                        onChange={handlePromptChange}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
                     </div>
+                    <p className="mt-3 text-sm leading-6 text-gray-600">
+                      Write a querry, description of the image(s) or a question
+                      to ask about the image(s).
+                    </p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-6 flex items-center justify-end gap-x-6">
-                <Link
-                  href="/home-page"
-                  type="button"
+                <button
+                  onClick={handleRefresh}
                   className="text-sm font-semibold leading-6 text-gray-900"
                 >
                   Cancel
-                </Link>
+                </button>
                 <button
-                  type="submit"
+                  onClick={handleButtonClick}
                   className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Save
+                  Submit
                 </button>
               </div>
-            </form>
-            <br />
-            <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
-              <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
-                  <div className="max-w-xl lg:max-w-lg">
-                    <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                      Diagnosis Results.
-                    </h2>
-                    <p className="mt-4 text-lg leading-8 text-gray-300">
-                      {text}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div
-                aria-hidden="true"
-                className="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6"
-              >
-                <div
-                  style={{
-                    clipPath:
-                      "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                  }}
-                  className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
-                />
+
+              <div className="border-b border-gray-900/10 pb-12">
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  RESULTS
+                </h2>
+                <h1 className="mt-1 text-sm leading-6 text-gray-600">{text}</h1>
               </div>
             </div>
+          </div>
+
+          <div>
+            <Dialog open={open} onClose={setOpen} className="relative z-10">
+              <DialogBackdrop
+                transition
+                className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+              />
+
+              <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                  <DialogPanel
+                    transition
+                    className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-lg data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+                  >
+                    <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                      <div className="sm:flex sm:items-start">
+                        <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                          <LightBulbIcon
+                            aria-hidden="true"
+                            className="h-6 w-6 text-red-600"
+                          />
+                        </div>
+                        <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                          <DialogTitle
+                            as="h3"
+                            className="text-base font-semibold leading-6 text-gray-900"
+                          >
+                            RESULTS
+                          </DialogTitle>
+                          <div className="mt-2">
+                            <p className="text-sm text-gray-500">{text}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                      <button
+                        type="button"
+                        onClick={() => setOpen(false)}
+                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                      >
+                        CANCEL
+                      </button>
+                      <button
+                        type="button"
+                        data-autofocus
+                        onClick={() => setOpen(false)}
+                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                      >
+                        SATISFIED
+                      </button>
+                    </div>
+                  </DialogPanel>
+                </div>
+              </div>
+            </Dialog>
           </div>
         </main>
       </div>
