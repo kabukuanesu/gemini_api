@@ -72,7 +72,7 @@ export default function HomePage() {
       path: "/gemini-vision",
     },
     {
-      title: "Symptoms Checker",
+      title: "Signs & Symptoms Checker",
       description: "Skin Issues",
       icon: <VaccinesIcon className={styles.iconStyles} />,
       path: "/gemini-chat",
@@ -323,6 +323,9 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
+            <br />
+            <br />
+            <br />
             <br />
             <br />
             <div
