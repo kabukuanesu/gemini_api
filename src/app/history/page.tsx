@@ -1,4 +1,6 @@
-"Use client";
+"use client";
+
+import { useState } from "react";
 
 import {
   Disclosure,
@@ -12,22 +14,27 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: "Anesu Kabuku",
+  email: "kabukuanesu@gmail.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  { name: "Home", href: "/home-page", current: false },
+  { name: "Overview", href: "/overview", current: false },
+  { name: "Upload", href: "/gemini-vision", current: false },
+  { name: "Diagnosis", href: "/gemini-chat", current: false },
+  { name: "Chatbot", href: "/gemini-chatter", current: false },
+  { name: "SkinCare", href: "/library", current: false },
+  { name: "History", href: "/history", current: true },
+  { name: "Notifications", href: "/reminder", current: false },
+  { name: "Community", href: "/community", current: false },
+  { name: "Help", href: "/support", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", href: "/profile" },
+  { name: "Settings", href: "/settings" },
+  { name: "Sign out", href: "/login" },
 ];
 
 function classNames(...classes) {
@@ -35,24 +42,17 @@ function classNames(...classes) {
 }
 
 export default function History() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div>
-      {/*
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-100">
-  <body class="h-full">
-  ```
-*/}
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-indigo-600">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
-                    alt="Your Company"
+                    alt="Skin Cancer Detector"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     className="h-8 w-8"
                   />
@@ -198,16 +198,74 @@ export default function History() {
           </DisclosurePanel>
         </Disclosure>
 
-        <header className="bg-white shadow">
+        <main className="bg-white">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Dashboard
-            </h1>
-          </div>
-        </header>
-        <main>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            {/* Your content */}
+            <div className="bg-white">
+              <div className="relative isolate px-6 pt-14 lg:px-8">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                >
+                  <div
+                    style={{
+                      clipPath:
+                        "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+                    }}
+                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                  />
+                </div>
+                <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+                  <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+                    <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                      Take control of your notifications by selecting which ones
+                      to enable or disable.{" "}
+                      <a
+                        href="/reminder"
+                        className="font-semibold text-indigo-600"
+                      >
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        View more <span aria-hidden="true">&rarr;</span>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                      HISTORY
+                    </h1>
+                    <p className="mt-6 text-lg leading-8 text-gray-600">
+                      Your history will appear here after using this platform
+                      for skin cancer detection.
+                    </p>
+                    <div className="mt-10 flex items-center justify-center gap-x-6">
+                      <a
+                        href="/home-page"
+                        className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      >
+                        Home
+                      </a>
+                      <a
+                        href="/overview"
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                      >
+                        Learn more <span aria-hidden="true">→</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+                >
+                  <div
+                    style={{
+                      clipPath:
+                        "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+                    }}
+                    className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </main>
       </div>
