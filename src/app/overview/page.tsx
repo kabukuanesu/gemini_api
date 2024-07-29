@@ -36,7 +36,7 @@ const navigation = [
   { name: "Overview", href: "/overview", current: true },
   { name: "Upload", href: "/gemini-vision", current: false },
   { name: "Diagnosis", href: "/gemini-chat", current: false },
-  { name: "Chatbot", href: "/gemini-chatting", current: false },
+  { name: "Chatbot", href: "/gemini-chatter", current: false },
   { name: "SkinCare", href: "/library", current: false },
   { name: "History", href: "/history", current: false },
   { name: "Notifications", href: "/reminder", current: false },
