@@ -14,8 +14,6 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-
 const user = {
   name: "Anesu Kabuku",
   email: "kabukuanesu@gmail.com",

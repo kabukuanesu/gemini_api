@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import "@/app/index.css";
+// import "@/app/index.css";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -16,22 +16,27 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: "Anesu Kabuku",
+  email: "kabukuanesu@gmail.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  { name: "Home", href: "/home-page", current: false },
+  { name: "Overview", href: "/overview", current: false },
+  { name: "Upload", href: "/gemini-vision", current: false },
+  { name: "Diagnosis", href: "/gemini-chat", current: false },
+  { name: "Chatbot", href: "/gemini-chatting", current: true },
+  { name: "SkinCare", href: "/library", current: false },
+  { name: "History", href: "/history", current: false },
+  { name: "Notifications", href: "/reminder", current: false },
+  { name: "Community", href: "/community", current: false },
+  { name: "Help", href: "/support", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", href: "/profile" },
+  { name: "Settings", href: "/settings" },
+  { name: "Sign out", href: "/login" },
 ];
 
 function classNames(...classes) {
@@ -48,9 +53,9 @@ export default function GeminiChatting() {
   const [chatHistory, setChatHistory] = useState([]);
 
   const surpriseOptions = [
-    "Who won the latest Novel Peace Prize?",
-    "Where does pizza come from?",
-    "How do you make a BLT sandwich",
+    "What is cancer?",
+    "Is there a cure for cancer?",
+    "Is skin cancer fatal?",
   ];
 
   const surprise = () => {
@@ -113,49 +118,15 @@ export default function GeminiChatting() {
   };
 
   return (
-    <div className="app">
-      <p>
-        What do you want to know?
-        <button className="surprise" onClick={surprise} disabled={!chatHistory}>
-          Surprise Me
-        </button>
-      </p>
-      <div className="input-container">
-        <input
-          value={value}
-          placeholder="When is Christmass...?"
-          onChange={(e) => setValue(e.target.value)}
-        />
-        {!error && <button onClick={getResponse}>Ask Me</button>}
-        {error && <button onClick={clear}>Clear</button>}
-      </div>
-      {error && <p>{error}</p>}
-      <div className="search-result">
-        {chatHistory.map((chatItem, _index) => (
-          <div key={_index}>
-            <p className="answer">
-              {chatItem.role} : {chatItem.parts.text}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
+    <div>
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-indigo-600">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
-                    alt="Your Company"
+                    alt="Skin Cancer Detector"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     className="h-8 w-8"
                   />
@@ -300,17 +271,39 @@ export default function GeminiChatting() {
             </div>
           </DisclosurePanel>
         </Disclosure>
-
-        <header className="bg-white shadow">
+        <main className="bg-white text-black">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Dashboard
-            </h1>
-          </div>
-        </header>
-        <main>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            {/* Your content */}
+            <div className="app">
+              <p>
+                What do you want to know?
+                <button
+                  className="surprise"
+                  onClick={surprise}
+                  disabled={!chatHistory}
+                >
+                  Anything
+                </button>
+              </p>
+              <div className="input-container">
+                <input
+                  value={value}
+                  placeholder="Can we prevent cancer...?"
+                  onChange={(e) => setValue(e.target.value)}
+                />
+                {!error && <button onClick={getResponse}>Ask Me</button>}
+                {error && <button onClick={clear}>Clear</button>}
+              </div>
+              {error && <p>{error}</p>}
+              <div className="search-result">
+                {chatHistory.map((chatItem, _index) => (
+                  <div key={_index}>
+                    <p className="answer">
+                      {chatItem.role} : {chatItem.parts.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </main>
       </div>
