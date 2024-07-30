@@ -12,22 +12,27 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: "Anesu Kabuku",
+  email: "kabukuanesu@gmail.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  { name: "Home", href: "/home-page", current: false },
+  { name: "Overview", href: "/overview", current: false },
+  { name: "Upload", href: "/gemini-vision", current: false },
+  { name: "Diagnosis", href: "/gemini-chat", current: false },
+  { name: "Chatbot", href: "/gemini-chatter", current: false },
+  { name: "SkinCare", href: "/library", current: false },
+  { name: "History", href: "/history", current: false },
+  { name: "Notifications", href: "/reminder", current: false },
+  { name: "Community", href: "/community", current: false },
+  { name: "Help", href: "/support", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", href: "/profile" },
+  { name: "Settings", href: "/settings" },
+  { name: "Sign out", href: "/login" },
 ];
 
 function classNames(...classes) {
@@ -37,22 +42,14 @@ function classNames(...classes) {
 export default function Settings() {
   return (
     <div>
-      {/*
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-100">
-  <body class="h-full">
-  ```
-*/}
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-indigo-600">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
-                    alt="Your Company"
+                    alt="Skin Cancer Detector"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     className="h-8 w-8"
                   />
@@ -198,17 +195,42 @@ export default function Settings() {
           </DisclosurePanel>
         </Disclosure>
 
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Dashboard
+        <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+          <br />
+          <br />
+          <br />
+          <div className="text-center">
+            <p className="text-base font-semibold text-indigo-600">404</p>
+            <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+              Page not found
             </h1>
+            <p className="mt-6 text-base leading-7 text-gray-600">
+              Sorry, we couldn’t find the page you’re looking for.
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <a
+                href="/home-page"
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Go back home
+              </a>
+              <a
+                href="/support"
+                className="text-sm font-semibold text-gray-900"
+              >
+                Contact support <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
           </div>
-        </header>
-        <main>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            {/* Your content */}
-          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </main>
       </div>
     </div>

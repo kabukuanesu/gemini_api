@@ -348,7 +348,7 @@ export default function HomePage() {
                     <span className="sr-only">Dashboard</span>
                   </span>
                   <span>
-                    <b>Please note that further analysis is required.</b>{" "}
+                    <b>Please note that further skin analysis is required.</b>{" "}
                     <a
                       href="/home-page"
                       className="flex items-center ms-0 text-sm font-medium text-blue-600 md:ms-1 md:inline-flex dark:text-blue-500 hover:underline"
