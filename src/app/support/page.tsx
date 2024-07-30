@@ -1,4 +1,7 @@
 "use client";
+import { useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
 
 import {
   Disclosure,
@@ -12,47 +15,85 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: "Anesu Kabuku",
+  email: "kabukuanesu@gmail.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  { name: "Home", href: "/home-page", current: false },
+  { name: "Overview", href: "/overview", current: false },
+  { name: "Upload", href: "/gemini-vision", current: false },
+  { name: "Diagnosis", href: "/gemini-chat", current: false },
+  { name: "Chatbot", href: "/gemini-chatter", current: false },
+  { name: "SkinCare", href: "/library", current: false },
+  { name: "History", href: "/history", current: false },
+  { name: "Notifications", href: "/reminder", current: false },
+  { name: "Community", href: "/community", current: false },
+  { name: "Help", href: "/support", current: true },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", href: "/profile" },
+  { name: "Settings", href: "/settings" },
+  { name: "Sign out", href: "/login" },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+dotenv.config();
+
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_API_KEY);
+
 export default function Support() {
+  const [chatHistory, setChatHistory] = useState([]);
+  const [responseText, setResponseText] = useState("");
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  async function handleSendMessage() {
+    const inputElement = document.getElementById("chat");
+    const message = inputElement.value.trim();
+
+    if (message === "") {
+      return;
+    }
+
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const chat = model.startChat({
+      history: chatHistory,
+      generationConfig: {
+        maxOutputTokens: 500,
+      },
+    });
+
+    const result = await chat.sendMessage(message);
+    const response = await result.response;
+    const text = await response.text();
+
+    setChatHistory((prevHistory) => [
+      ...prevHistory,
+      { role: "user", parts: inputElement.value.trim() },
+      { role: "model", parts: text },
+    ]);
+    setResponseText(text);
+
+    inputElement.value = "";
+  }
+
   return (
     <div>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-indigo-600">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
-                    alt="Your Company"
+                    alt="Skin Cancer Detector"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     className="h-8 w-8"
                   />
@@ -197,18 +238,84 @@ export default function Support() {
             </div>
           </DisclosurePanel>
         </Disclosure>
+        <main className="bg-white text-black">
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div>
+              <div className="space-y-12">
+                <div className="border-b border-gray-900/10 pb-12">
+                  <h2 className="text-base font-semibold leading-7 text-gray-900">
+                    Ask Anything
+                  </h2>
+                  <p className="mt-1 text-sm leading-6 text-gray-600">
+                    We are here to answer any questions you may have about skin
+                    cancer or this platform.
+                  </p>
+                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div className="col-span-full">
+                      <label
+                        htmlFor="chat"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Question
+                      </label>
+                      <div className="mt-2">
+                        <textarea
+                          id="chat"
+                          rows={3}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                      <p className="mt-3 text-sm leading-6 text-gray-600">
+                        Please provide detailed questions in order to receive
+                        accurate answers.
+                      </p>
+                    </div>
+                    <div className="mt-6 flex items-center justify-end gap-x-6">
+                      <button
+                        type="button"
+                        onClick={handleRefresh}
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        id="send"
+                        onClick={handleSendMessage}
+                        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Dashboard
-            </h1>
+                <div className="border-b border-gray-900/10 pb-12">
+                  <h2 className="text-base font-semibold leading-7 text-gray-900">
+                    ANSWER
+                  </h2>
+                  <div id="chatContainer">
+                    {chatHistory.map((message, index) => (
+                      <p key={index} className={message.role}>
+                        {message.message}
+                      </p>
+                    ))}
+                  </div>
+                  <div className="mt-1 text-sm leading-6 text-gray-600">
+                    <h1>{responseText}</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </header>
-        <main>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            {/* Your content */}
-          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </main>
       </div>
     </div>
