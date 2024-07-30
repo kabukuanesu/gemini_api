@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import Link from "next/link";
 import NavBar from "@/app/nav-bar/nav-bar";

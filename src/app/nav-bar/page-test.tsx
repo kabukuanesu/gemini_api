@@ -1,4 +1,5 @@
 "use client";
+
 import SettingsIcon from "@mui/icons-material/Settings";
 import * as React from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
